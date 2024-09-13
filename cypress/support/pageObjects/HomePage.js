@@ -20,28 +20,28 @@ class HomePage {
     }
   
     clickMP3PlayerCategory() {
-      //cy.get(this.pageLocator.mpCategory,  { timeout: 10000 }).should('be.visible').click();
+     
       cy.contains('MP3 Players')
       .scrollIntoView()
-      .wait(1000) // Wait after scrolling
-      .wait(1000) // Wait after scrolling
+      .wait(1000) 
+      .wait(1000) 
       .then(($el) => {
-        // Log the element's position and visibility
+        
         const rect = $el[0].getBoundingClientRect();
         console.log('Element position:', rect);
         console.log('Element visibility:', $el.is(':visible'));
 
-        // Check if the element is actually visible
+        
         if (!$el.is(':visible')) {
           console.error('Element is not visible after scrolling.');
-          // Optionally, take a screenshot for debugging
+          
           cy.screenshot('element-not-visible');
-          // Attempt to click using JavaScript
+          
           cy.window().then((win) => {
             win.document.querySelector('a.icon-left.both.nav-link').click();
           });
         } else {
-          // Click the element with force if it's visible
+          
           cy.wrap($el).click({ force: true }).then(() => {
             console.log('Clicked on MP3 Players');
           });
